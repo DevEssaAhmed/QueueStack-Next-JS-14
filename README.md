@@ -11,15 +11,35 @@
  -->
 
 
-![demo](https://i.ibb.co/x7FChRP/Thumbnail.jpg)
+<p align="center">
 
-<div style="text-align: center;">
+  <a href="https://github.com/DevEssaAhmed">
+    <img src="https://custom-icon-badges.demolab.com/badge/made%20by%20-DevEssaAhmed-556bf2?logo=github&logoColor=white&labelColor=101827" alt="DevEssaAhmed">
+  </a>
 
-[![DevEssaAhmed](https://custom-icon-badges.demolab.com/badge/made%20by%20-DevEssaAhmed-556bf2?logo=github&logoColor=white&labelColor=101827)](https://github.com/DevEssaAhmed)
-[![License](https://img.shields.io/github/license/DevEssaAhmed/QueueStack-Next-JS-14?color=dddddd&labelColor=000000)](https://github.com/DevEssaAhmed/QueueStack-Next-JS-14/blob/main/LICENSE) [![Top Language](https://img.shields.io/github/languages/top/DevEssaAhmed/QueueStack-Next-JS-14?logo=github&logoColor=%23007ACC&label=TypeScript)](https://www.typescriptlang.org/) [![Contributors](https://img.shields.io/github/contributors/DevEssaAhmed/QueueStack-Next-JS-14?style=flat&color=orange&label=Contributors)](https://github.com/DevEssaAhmed/QueueStack-Next-JS-14/graphs/contributors) ![Release](https://img.shields.io/github/release/DevEssaAhmed/QueueStack-Next-JS-14.svg)
-![PRs](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=shields) ![deployment](https://img.shields.io/github/deployments/DevEssaAhmed/QueueStack-Next-JS-14/Production?logo=vercel&label=Website) [![Known Vulnerabilities](https://snyk.io/test/github/DevEssaAhmed/QueueStack-Next-JS-14/badge.svg)](https://snyk.io/test/github/DevEssaAhmed/QueueStack-Next-JS-14)
+  <a href="https://github.com/DevEssaAhmed/QueueStack-Next-JS-14/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/DevEssaAhmed/QueueStack-Next-JS-14?color=dddddd&labelColor=000000" alt="License">
+  </a>
 
-</div>
+  <a href="https://www.typescriptlang.org/">
+    <img src="https://img.shields.io/github/languages/top/DevEssaAhmed/QueueStack-Next-JS-14?logo=github&logoColor=%23007ACC&label=TypeScript" alt="Top Language">
+  </a>
+
+  <a href="https://github.com/DevEssaAhmed/QueueStack-Next-JS-14/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/DevEssaAhmed/QueueStack-Next-JS-14?style=flat&color=orange&label=Contributors" alt="Contributors">
+  </a>
+
+  <img src="https://img.shields.io/github/release/DevEssaAhmed/QueueStack-Next-JS-14.svg" alt="Release">
+
+  <img src="https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=shields" alt="PRs Welcome">
+
+  <img src="https://img.shields.io/github/deployments/DevEssaAhmed/QueueStack-Next-JS-14/Production?logo=vercel&label=Website" alt="Deployment">
+
+  <a href="https://snyk.io/test/github/DevEssaAhmed/QueueStack-Next-JS-14">
+    <img src="https://snyk.io/test/github/DevEssaAhmed/QueueStack-Next-JS-14/badge.svg" alt="Known Vulnerabilities">
+  </a>
+
+</p>
 
 
 
