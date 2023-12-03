@@ -10,12 +10,23 @@
 // export const config = {
 //   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 // };
-import { authMiddleware } from "@clerk/nextjs";
+import { authMiddleware } from '@clerk/nextjs';
 export default authMiddleware({
   // "/" will be accessible to all users
-  publicRoutes: ["/"],
+  publicRoutes: [
+    '/',
+    '/api/webhook',
+    'question/:id',
+    '/tags/:id',
+    '/tags',
+    '/questions',
+    '/questions/:id',
+    'profile/:id',
+    '/community',
+  ],
+  ignoredRoutes: ['/api/webhook', '/api/chatgpt'],
 });
 
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 };
