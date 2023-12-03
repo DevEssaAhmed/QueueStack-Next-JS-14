@@ -8,16 +8,16 @@ import { HomePageFilters } from '@/constants/filters';
 import { getQuestions } from '@/lib/actions/question.action';
 import Link from 'next/link';
 
-interface Question {
-  _id: string;
-  title: string;
-  tags: { _id: string; name: string }[];
-  author: { _id: string; name: string; picture: string };
-  upvotes: number;
-  views: number;
-  answers: Array<object>;
-  createdAt: Date;
-}
+// interface Question {
+//   _id: string;
+//   title: string;
+//   tags: { _id: string; name: string }[];
+//   author: { _id: string; name: string; picture: string };
+//   upvotes: number;
+//   views: number;
+//   answers: Array<object>;
+//   createdAt: Date;
+// }
 
 // const questions: Question[] = [
 //   {
