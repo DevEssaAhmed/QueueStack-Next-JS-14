@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 // eslint-disable-next-line camelcase
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
+import '../styles/prism.css';
 import { MyThemeProvider } from '@/context/ThemeProvider';
 const inter = Inter({
   subsets: ['latin'],

@@ -9,3 +9,7 @@ export const questionsSchema = z.object({
     message: 'tags must be between 1 and 5',
   }),
 });
+
+export const answersSchema = z.object({
+  answer: z.string().min(50),
+});
