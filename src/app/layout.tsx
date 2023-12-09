@@ -6,6 +6,8 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import '../styles/prism.css';
 import { MyThemeProvider } from '@/context/ThemeProvider';
+import { Toaster } from '@/components/ui/toaster';
+
 const inter = Inter({
   subsets: ['latin'],
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -42,7 +44,10 @@ export default function RootLayout({
             },
           }}
         >
-          <MyThemeProvider>{children}</MyThemeProvider>
+          <MyThemeProvider>
+            {children}
+            <Toaster />
+          </MyThemeProvider>
         </ClerkProvider>
       </body>
     </html>

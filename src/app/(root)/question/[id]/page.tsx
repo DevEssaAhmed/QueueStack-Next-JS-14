@@ -5,11 +5,14 @@ import Tags from '@/components/shared/Tags/Tags';
 import { getQuestionById } from '@/lib/actions/question.action';
 import { getUserById } from '@/lib/actions/user.action';
 import { formatAndDivideNumber, getTimestamp } from '@/lib/utils';
-import { auth } from '@clerk/nextjs';
+import { SignedIn, auth } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
+
+// import { redirect } from 'next/navigation';
 import React from 'react';
+import AllAnswers from './AllAnswers';
+import Votes from '@/components/shared/Votes/Votes';
 
 const QuestionDetailsPage = async ({ params }: any) => {
   const { userId: clerkId } = auth();
@@ -19,7 +22,7 @@ const QuestionDetailsPage = async ({ params }: any) => {
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
   } else {
-    return redirect('/sign-in');
+    // return redirect('/sign-in');
   }
 
   const result = await getQuestionById({ questionId: params.id });
@@ -43,10 +46,21 @@ const QuestionDetailsPage = async ({ params }: any) => {
               className='rounded-full'
             />
             <p className='paragraph-semibold text-dark300_light700'>
-              {result.author.title}
+              {result.author.name}
             </p>
           </Link>
-          <div className='flex justify-end'>Voting</div>
+          <div className='flex justify-end'>
+            <Votes
+              type='Question'
+              userId={JSON.stringify(mongoUser?._id)}
+              itemId={JSON.stringify(result._id)}
+              upvotes={result.upvotes.length}
+              hasUpvoted={result.upvotes.includes(mongoUser?._id)}
+              downvotes={result.downvotes.length}
+              hasDownvoted={result.downvotes.includes(mongoUser?._id)}
+              hasSaved={mongoUser?.savedQuestions.includes(result._id)}
+            />
+          </div>
         </div>
         <h2 className='h2-semibold text-dark200_light900 mt-3.5 w-full text-left'>
           {result.title}
@@ -77,14 +91,15 @@ const QuestionDetailsPage = async ({ params }: any) => {
         />
       </div>
       <ParseHTML data={result.content} />
-      <div className='mt-8 flex flex-row items-center justify-between'>
+      <div className='mt-4 flex flex-row items-center justify-between'>
         <div className='flex flex-wrap gap-2'>
           {result.tags.map((tag: any) => (
             <Tags key={tag._id} _id={tag._id} name={tag.name} />
           ))}
         </div>
+      </div>
 
-        {/* <SignedIn>
+      {/* <SignedIn>
           {showActionButtons && (
             <EditDeleteAction
               type='Question'
@@ -92,13 +107,32 @@ const QuestionDetailsPage = async ({ params }: any) => {
             />
           )}
         </SignedIn> */}
-        <AnswerForm
-          type='Create'
-          question={result.content}
-          questionId={JSON.stringify(result._id)}
-          authorId={JSON.stringify(mongoUser._id)}
-        />
-      </div>
+      <AllAnswers
+        questionId={result._id}
+        userId={mongoUser?._id}
+        totalAnswers={result.answers.length}
+      />
+      {mongoUser ? (
+        <>
+          <SignedIn>
+            <AnswerForm
+              type='Create'
+              question={result.content}
+              questionId={JSON.stringify(result._id)}
+              authorId={JSON.stringify(mongoUser._id)}
+            />
+          </SignedIn>
+        </>
+      ) : (
+        <h1 className='text-center text-lg font-semibold'>
+          You need to
+          <Link href='/sign-in' className='text-primary-500 underline'>
+            {' '}
+            sign in{' '}
+          </Link>
+          to answer this question
+        </h1>
+      )}
     </>
   );
 };

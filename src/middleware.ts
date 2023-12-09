@@ -16,11 +16,10 @@ export default authMiddleware({
   publicRoutes: [
     '/',
     '/api/webhook',
-    'question/:id',
     '/tags/:id',
     '/tags',
     '/questions',
-    '/questions/:id',
+    '/question/:id',
     'profile/:id',
     '/community',
   ],

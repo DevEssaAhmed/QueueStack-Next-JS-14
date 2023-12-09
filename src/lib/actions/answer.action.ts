@@ -173,15 +173,15 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
   try {
     connectToDatabase();
 
-    const { answerId, userId, hasupVoted, hasdownVoted, path } = params;
+    const { answerId, userId, hasUpvoted, hasDownvoted, path } = params;
 
     let updateQuery = {};
 
-    if (hasupVoted) {
+    if (hasUpvoted) {
       updateQuery = {
         $pull: { upvotes: userId },
       };
-    } else if (hasdownVoted) {
+    } else if (hasDownvoted) {
       updateQuery = {
         $pull: { downvotes: userId },
         $push: { upvotes: userId },
@@ -201,12 +201,12 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
     if (userId !== answer.author.toString()) {
       // increment user's reputation by +S for upvoting/revoking an upvote to the answer (S = 2)
       await User.findByIdAndUpdate(userId, {
-        $inc: { reputation: hasupVoted ? -2 : 2 },
+        $inc: { reputation: hasUpvoted ? -2 : 2 },
       });
 
       // increment author's reputation by +S for upvoting/revoking an upvote to the answer (S = 10)
       await User.findByIdAndUpdate(answer.author, {
-        $inc: { reputation: hasupVoted ? -10 : 10 },
+        $inc: { reputation: hasUpvoted ? -10 : 10 },
       });
     }
 
@@ -221,15 +221,15 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
   try {
     connectToDatabase();
 
-    const { answerId, userId, hasupVoted, hasdownVoted, path } = params;
+    const { answerId, userId, hasUpvoted, hasDownvoted, path } = params;
 
     let updateQuery = {};
 
-    if (hasdownVoted) {
+    if (hasDownvoted) {
       updateQuery = {
         $pull: { downvotes: userId },
       };
-    } else if (hasupVoted) {
+    } else if (hasUpvoted) {
       updateQuery = {
         $pull: { upvotes: userId },
         $push: { downvotes: userId },
@@ -249,12 +249,12 @@ export async function downvoteAnswer(params: AnswerVoteParams) {
     if (userId !== answer.author.toString()) {
       // decrement author's reputation by +S for downvoting/revoking an downvote to the answer (S = 2)
       await User.findByIdAndUpdate(userId, {
-        $inc: { reputation: hasdownVoted ? -2 : 2 },
+        $inc: { reputation: hasDownvoted ? -2 : 2 },
       });
 
       // decrement author's reputation by +S for downvoting/revoking an downvote to the answer (S = 10)
       await User.findByIdAndUpdate(answer.author, {
-        $inc: { reputation: hasdownVoted ? -10 : 10 },
+        $inc: { reputation: hasDownvoted ? -10 : 10 },
       });
     }
 

@@ -46,8 +46,8 @@ interface Content {
 }
 
 interface Voting {
-  hasupVoted: boolean;
-  hasdownVoted: boolean;
+  hasUpvoted: boolean;
+  hasDownvoted: boolean;
 }
 
 interface Searchable
