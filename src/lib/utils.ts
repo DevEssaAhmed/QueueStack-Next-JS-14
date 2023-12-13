@@ -1,6 +1,9 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+import type { UrlQueryParams } from '@/types';
+import qs from 'query-string';
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -56,4 +59,29 @@ export const getFormattedNumber = (number: number): string => {
   if (number < 1000000) return `${(number / 1000).toFixed(1)}K`; // Convert to K for number from 1000 < n < 1 million
   if (number < 1000000000) return `${(number / 1000000).toFixed(1)}M`; // Convert to M for number from 1 million < n < 1 billion
   return `${(number / 1000000000).toFixed(1)}B`; // Convert to B for number n > 1 billion
+};
+
+export const getFormattedJoinedDate = (date: Date): string => {
+  const month: string = date.toLocaleString('en', { month: 'long' });
+  const year: number = date.getFullYear();
+
+  return `Joined ${month} ${year}`;
+};
+
+export const formUrlQuery = ({
+  params,
+  key,
+  value,
+}: UrlQueryParams): string => {
+  const currentUrl = qs.parse(params);
+
+  currentUrl[key] = value;
+
+  return qs.stringifyUrl(
+    {
+      url: window.location.pathname,
+      query: currentUrl,
+    },
+    { skipNull: true }
+  );
 };
