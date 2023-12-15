@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { SignedIn } from '@clerk/nextjs';
 
 import { getFormattedNumber, getTimestamp } from '@/lib/utils';
-import Metric from '../shared/Metric/Metric';
-import EditDeleteAction from '../shared/EditDeleteAction';
+import EditDeleteAction from '../EditDeleteAction/EditDeleteAction';
+import Metric from '../Metric/Metric';
 
 interface Props {
   clerkId?: string | null;

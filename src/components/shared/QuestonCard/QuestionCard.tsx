@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React from 'react';
 import Tags from '../Tags/Tags';
 import Metric from '../Metric/Metric';
 import { formatAndDivideNumber, getTimestamp } from '@/lib/utils';
@@ -7,6 +6,7 @@ import { formatAndDivideNumber, getTimestamp } from '@/lib/utils';
 interface Props {
   _id: string;
   title: string;
+  clerkId?: string | null;
   tags: { _id: string; name: string }[];
   author: { _id: string; name: string; picture: string };
   upvotes: number;

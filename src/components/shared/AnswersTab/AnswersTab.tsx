@@ -1,11 +1,10 @@
 import Pagination from '../Pagination/Pagination';
 
-import AnswerCard from '@/components/cards/AnswerCard';
-
 import { getUserAnswers } from '@/lib/actions/user.action';
 
 import type { UserId } from '@/lib/actions/shared.types';
 import type { SearchParamsProps } from '@/types';
+import AnswerCard from '../AnswerCard/AnswerCard';
 
 interface Props extends SearchParamsProps, UserId {
   clerkId?: string | null;

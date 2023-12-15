@@ -1,10 +1,9 @@
-import QuestionCard from '@/components/cards/QuestionCard';
-
 import { getUserQuestions } from '@/lib/actions/user.action';
 
 import type { UserId } from '@/lib/actions/shared.types';
 import type { SearchParamsProps } from '@/types';
 import Pagination from '../Pagination/Pagination';
+import QuestionCard from '../QuestonCard/QuestionCard';
 
 interface Props extends SearchParamsProps, UserId {
   clerkId?: string | null;

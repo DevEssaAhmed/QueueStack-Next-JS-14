@@ -6,11 +6,15 @@ import Tag from '@/database/tag.model';
 import User from '@/database/user.model';
 import {
   CreateQuestionParams,
+  DeleteQuestionParams,
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
 } from './shared.types';
 import { revalidatePath } from 'next/cache';
+import Answer from '@/database/answer.model';
+import Interaction from '@/database/interaction.model';
+import { redirect } from 'next/navigation';
 
 export async function getQuestions(params: GetQuestionsParams) {
   try {
@@ -135,5 +139,43 @@ export async function downVoteQuestion(params: QuestionVoteParams) {
     return question;
   } catch (error) {
     throw new Error('Error downvoting question');
+  }
+}
+
+export async function deleteQuestion(params: DeleteQuestionParams) {
+  try {
+    connectToDatabase();
+
+    const { questionId, path, isQuestionPath = false } = params;
+
+    const question = await Question.findById({ _id: questionId });
+
+    if (!question) {
+      throw new Error('Question not found');
+    }
+
+    await Question.deleteOne({ _id: questionId });
+
+    await Answer.deleteMany({ question: questionId });
+
+    await Interaction.deleteMany({ question: questionId });
+
+    await Tag.updateMany(
+      { questions: questionId },
+      { $pull: { questions: questionId } }
+    );
+
+    await User.findByIdAndUpdate(question.author, {
+      $inc: { reputation: -10 },
+    });
+
+    if (isQuestionPath) {
+      redirect('/');
+    } else {
+      revalidatePath(path);
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 }
