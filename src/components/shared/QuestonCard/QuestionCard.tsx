@@ -2,14 +2,22 @@ import Link from 'next/link';
 import Tags from '../Tags/Tags';
 import Metric from '../Metric/Metric';
 import { formatAndDivideNumber, getTimestamp } from '@/lib/utils';
+import { SignedIn } from '@clerk/nextjs';
+import EditDeleteAction from '../EditDeleteAction/EditDeleteAction';
 
 interface Props {
   _id: string;
   title: string;
   clerkId?: string | null;
   tags: { _id: string; name: string }[];
-  author: { _id: string; name: string; picture: string };
-  upvotes: number;
+  author: {
+    _id: string;
+    clerkId: string;
+    name: string;
+    picture: string;
+  };
+  upvotes: string[];
+
   views: number;
   answers: Array<object>;
   createdAt: Date;
@@ -17,6 +25,7 @@ interface Props {
 
 const QuestionCard = ({
   _id,
+  clerkId,
   title,
   tags,
   author,
@@ -25,6 +34,8 @@ const QuestionCard = ({
   answers,
   createdAt,
 }: Props) => {
+  const showActionButtons = clerkId && clerkId === author.clerkId;
+
   return (
     <div className='card-wrapper rounded-xl p-9 sm:px-11'>
       <div className='flex flex-col-reverse items-start justify-between gap-5 sm:flex-row'>
@@ -39,6 +50,11 @@ const QuestionCard = ({
           </Link>
         </div>
         {/* If signed show edit delete button */}
+        <SignedIn>
+          {showActionButtons && (
+            <EditDeleteAction type='Question' itemId={JSON.stringify(_id)} />
+          )}
+        </SignedIn>
       </div>
       <div className='mt-3.5 flex flex-wrap gap-2'>
         {tags.map((tag) => (
@@ -58,7 +74,7 @@ const QuestionCard = ({
         <Metric
           imgSrc='/assets/icons/like.svg'
           alt='upvotes'
-          value={formatAndDivideNumber(upvotes)}
+          value={formatAndDivideNumber(upvotes.length)}
           title=' Votes'
           textStyles='small-medium text-dark400_light800'
         />

@@ -9,8 +9,6 @@ import { SignedIn, auth } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// import { redirect } from 'next/navigation';
-import React from 'react';
 import AllAnswers from './AllAnswers';
 import Votes from '@/components/shared/Votes/Votes';
 
@@ -72,7 +70,7 @@ const QuestionDetailsPage = async ({ params }: any) => {
           imgSrc='/assets/icons/clock.svg'
           alt='asked'
           value={`asked ${getTimestamp(result.createdAt)}`}
-          title=' Asked'
+          title=''
           textStyles='small-medium text-dark400_light800'
         />
         <Metric

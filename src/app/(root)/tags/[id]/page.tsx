@@ -8,7 +8,12 @@ interface Question {
   _id: string;
   title: string;
   tags: { _id: string; name: string }[];
-  author: { _id: string; name: string; picture: string };
+  author: {
+    _id: string;
+    clerkId: string;
+    name: string;
+    picture: string;
+  };
   upvotes: string[];
   views: number;
   answers: Array<object>;
@@ -47,7 +52,7 @@ const TagDetailsPage = async ({ params, searchParams }: URLProps) => {
               title={question.title}
               tags={question.tags}
               author={question.author}
-              upvotes={question.upvotes.length}
+              upvotes={question.upvotes}
               views={question.views}
               answers={question.answers}
               createdAt={question.createdAt}

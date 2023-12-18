@@ -11,14 +11,19 @@ interface Question {
   _id: string;
   title: string;
   tags: { _id: string; name: string }[];
-  author: { _id: string; name: string; picture: string };
+  author: {
+    _id: string;
+    clerkId: string;
+    name: string;
+    picture: string;
+  };
   upvotes: string[];
   views: number;
   answers: Array<object>;
   createdAt: Date;
 }
 
-export default async function CommunityPage() {
+export default async function SavedPage() {
   const { userId } = auth();
   if (!userId) return null;
   const result = await getSavedQuestions({
@@ -52,7 +57,7 @@ export default async function CommunityPage() {
               title={question.title}
               tags={question.tags}
               author={question.author}
-              upvotes={question.upvotes.length}
+              upvotes={question.upvotes}
               views={question.views}
               answers={question.answers}
               createdAt={question.createdAt}
