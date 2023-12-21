@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import {
   Sheet,
   SheetClose,
@@ -9,18 +8,48 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { SignedOut } from '@clerk/nextjs';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { sidebarLinks } from '@/constants';
 
 const NavContent = () => {
   const pathname = usePathname();
+
   return (
     <section className='flex   flex-col gap-6 pt-16'>
       {sidebarLinks.map((item) => {
         const isActive =
           (pathname.includes(item.route) && item.route.length > 1) ||
           pathname === item.route;
+
+        if (item.route === '/profile') {
+          return (
+            <SignedIn key={item.route}>
+              <SheetClose asChild key={item.route}>
+                <Link
+                  href={item.route}
+                  className={`${
+                    isActive
+                      ? 'primary-gradient rounded-lg text-light-900'
+                      : 'text-dark300_light900'
+                  } flex items-center justify-start gap-2 bg-transparent  p-3 sm:gap-4 sm:p-4`}
+                >
+                  <Image
+                    className={`${isActive ? '' : 'invert-colors'} `}
+                    src={item.imgURL}
+                    alt={item.label}
+                    width={20}
+                    height={20}
+                  />
+                  <p className={`${isActive ? 'base-bold' : 'base-medium'}`}>
+                    {item.label}
+                  </p>
+                </Link>
+              </SheetClose>
+            </SignedIn>
+          );
+        }
+
         return (
           <SheetClose asChild key={item.route}>
             <Link
@@ -29,7 +58,7 @@ const NavContent = () => {
                 isActive
                   ? 'primary-gradient rounded-lg text-light-900'
                   : 'text-dark300_light900'
-              } flex items-center justify-start gap-4 bg-transparent p-4`}
+              } flex items-center justify-start gap-2 bg-transparent p-3 sm:gap-4 sm:p-4`}
             >
               <Image
                 className={`${isActive ? '' : 'invert-colors'} `}
@@ -76,7 +105,7 @@ const MobileNav = () => {
             Queue<span className='text-primary-500'>Stack</span>
           </p>
         </Link>
-        <div className='flex h-full flex-col justify-between pb-8 '>
+        <div className='flex h-full flex-col justify-between pb-4 sm:pb-8  '>
           <SheetClose asChild>
             <NavContent />
           </SheetClose>
