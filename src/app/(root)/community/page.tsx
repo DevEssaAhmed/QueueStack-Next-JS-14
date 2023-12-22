@@ -4,10 +4,12 @@ import UserCard from '@/components/shared/UserCard/UserCard';
 
 import { UserFilters } from '@/constants/filters';
 import { getAllUsers } from '@/lib/actions/user.action';
+import { SearchParamsProps } from '@/types';
 import Link from 'next/link';
 
-const CommunityPage = async () => {
-  const result = await getAllUsers({});
+const CommunityPage = async ({ searchParams }: SearchParamsProps) => {
+  const result = await getAllUsers({ searchQuery: searchParams?.q });
+
   return (
     <>
       <h1 className='h1-bold text-dark100_light900'>All Users</h1>
@@ -27,7 +29,7 @@ const CommunityPage = async () => {
         />
       </div>
 
-      <section className='mt-12 flex flex-wrap gap-4'>
+      <section className='mt-12 flex flex-wrap items-center gap-4'>
         {result.users.length > 0 ? (
           result.users.map((user) => {
             return <UserCard key={user.clerkId} user={user} />;

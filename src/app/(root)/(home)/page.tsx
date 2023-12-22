@@ -6,48 +6,11 @@ import LocalSearchBar from '@/components/shared/Search/LocalSearchBar';
 import { Button } from '@/components/ui/button';
 import { HomePageFilters } from '@/constants/filters';
 import { getQuestions } from '@/lib/actions/question.action';
+import { SearchParamsProps } from '@/types';
 import Link from 'next/link';
 
-// interface Question {
-//   _id: string;
-//   title: string;
-//   tags: { _id: string; name: string }[];
-//   author: { _id: string; name: string; picture: string };
-//   upvotes: number;
-//   views: number;
-//   answers: Array<object>;
-//   createdAt: Date;
-// }
-
-// const questions: Question[] = [
-//   {
-//     _id: '1',
-//     title: 'Cascading Deletes in SQLAlchemy',
-//     tags: [
-//       { _id: '1', name: 'python' },
-//       { _id: '2', name: 'sql' },
-//     ],
-//     author: {
-//       _id: '101',
-//       name: 'John Doe',
-//       picture: 'john-doe.jpg',
-//     },
-//     upvotes: 10,
-//     views: 99,
-//     answers: [
-//       {
-//         /* An example answer object */
-//       },
-//       {
-//         /* Another example answer object */
-//       },
-//     ],
-//     createdAt: new Date('2021-09-01T12:00:00.000Z'),
-//   },
-// ];
-
-export default async function Home() {
-  const result = await getQuestions({});
+export default async function Home({ searchParams }: SearchParamsProps) {
+  const result = await getQuestions({ searchQuery: searchParams?.q });
 
   return (
     <>
