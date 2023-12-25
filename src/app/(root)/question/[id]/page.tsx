@@ -12,7 +12,7 @@ import Link from 'next/link';
 import AllAnswers from './AllAnswers';
 import Votes from '@/components/shared/Votes/Votes';
 
-const QuestionDetailsPage = async ({ params }: any) => {
+const QuestionDetailsPage = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();
 
   let mongoUser;
@@ -109,6 +109,8 @@ const QuestionDetailsPage = async ({ params }: any) => {
         questionId={result._id}
         userId={mongoUser?._id}
         totalAnswers={result.answers.length}
+        page={searchParams?.page}
+        filter={searchParams?.filter}
       />
       {mongoUser ? (
         <>

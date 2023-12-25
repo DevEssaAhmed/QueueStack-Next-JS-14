@@ -5,6 +5,7 @@ import LocalSearchBar from '@/components/shared/Search/LocalSearchBar';
 
 import { QuestionFilters } from '@/constants/filters';
 import { getSavedQuestions } from '@/lib/actions/user.action';
+import { SearchParamsProps } from '@/types';
 import { auth } from '@clerk/nextjs';
 
 interface Question {
@@ -23,11 +24,13 @@ interface Question {
   createdAt: Date;
 }
 
-export default async function SavedPage() {
+export default async function SavedPage({ searchParams }: SearchParamsProps) {
   const { userId } = auth();
   if (!userId) return null;
   const result = await getSavedQuestions({
     clerkId: userId,
+    searchQuery: searchParams?.q,
+    filter: searchParams.filter,
   });
 
   return (

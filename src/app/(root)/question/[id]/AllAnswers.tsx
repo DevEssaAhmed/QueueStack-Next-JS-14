@@ -6,7 +6,6 @@ import { getAnswers } from '@/lib/actions/answer.action';
 import { getTimestamp } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 interface Props {
   questionId: string;
@@ -23,7 +22,11 @@ const AllAnswers = async ({
   page,
   filter,
 }: Props) => {
-  const result = await getAnswers({ questionId });
+  const result = await getAnswers({
+    questionId,
+    page: page ? +page : 1,
+    sortBy: filter,
+  });
 
   if (!result) return;
   return (
