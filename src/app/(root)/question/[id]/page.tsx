@@ -11,6 +11,7 @@ import Link from 'next/link';
 
 import AllAnswers from './AllAnswers';
 import Votes from '@/components/shared/Votes/Votes';
+import EditDeleteAction from '@/components/shared/EditDeleteAction/EditDeleteAction';
 
 const QuestionDetailsPage = async ({ params, searchParams }: any) => {
   const { userId: clerkId } = auth();
@@ -26,7 +27,7 @@ const QuestionDetailsPage = async ({ params, searchParams }: any) => {
   const result = await getQuestionById({ questionId: params.id });
   if (!result) return null;
 
-  // const showActionButtons = clerkId && clerkId === result?.author.clerkId;
+  const showActionButtons = clerkId && clerkId === result?.author.clerkId;
 
   return (
     <>
@@ -97,14 +98,14 @@ const QuestionDetailsPage = async ({ params, searchParams }: any) => {
         </div>
       </div>
 
-      {/* <SignedIn>
-          {showActionButtons && (
-            <EditDeleteAction
-              type='Question'
-              itemId={JSON.stringify(result._id)}
-            />
-          )}
-        </SignedIn> */}
+      <SignedIn>
+        {showActionButtons && (
+          <EditDeleteAction
+            type='Question'
+            itemId={JSON.stringify(result._id)}
+          />
+        )}
+      </SignedIn>
       <AllAnswers
         questionId={result._id}
         userId={mongoUser?._id}
