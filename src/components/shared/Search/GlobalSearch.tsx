@@ -4,7 +4,7 @@ import { formUrlQuery, removeKeysFromQuery } from '@/lib/utils';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import GlobalResult from './GlobalResult';
 
 const GlobalSearch = () => {
@@ -15,6 +15,22 @@ const GlobalSearch = () => {
 
   const [search, setSearch] = useState(query || '');
   const [isOpen, setIsOpen] = useState(false);
+  const searchRef = useRef(null);
+
+  useEffect(() => {
+    const handleCOutsideClick = (e: any) => {
+      // @ts-ignore
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    setIsOpen(false);
+    document.addEventListener('click', handleCOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleCOutsideClick);
+    };
+  }, [pathname]);
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (search) {
@@ -39,12 +55,11 @@ const GlobalSearch = () => {
     return () => clearTimeout(delayDebounceFn);
   }, [search, pathname, router, searchParams, query]);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname, router]);
-
   return (
-    <div className='relative w-full max-w-[600px] max-lg:hidden'>
+    <div
+      ref={searchRef}
+      className='relative w-full max-w-[600px] max-lg:hidden'
+    >
       <div className='background-light800_darkgradient relative flex min-h-[56px] grow items-center gap-1 rounded-xl px-4'>
         <Image
           src='/assets/icons/search.svg'

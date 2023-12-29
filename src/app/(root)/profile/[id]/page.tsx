@@ -28,6 +28,7 @@ export async function generateMetadata({
 
 const Page = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();
+
   const userInfo = await getUserInfo({ userId: params.id });
 
   return (
@@ -96,8 +97,8 @@ const Page = async ({ params, searchParams }: URLProps) => {
       <Stats
         totalQuestions={userInfo.totalQuestions}
         totalAnswers={userInfo.totalAnswers}
-        badges={userInfo.user.badgeCounts}
-        reputation={userInfo.user.reputation}
+        badges={userInfo.badgeCounts}
+        reputation={userInfo.reputation}
       />
 
       <div className='mt-10 flex gap-10'>

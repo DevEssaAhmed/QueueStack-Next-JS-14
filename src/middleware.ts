@@ -7,7 +7,6 @@
 //   publicRoutes: ['/'],
 // });
 
-
 import { authMiddleware } from '@clerk/nextjs';
 export default authMiddleware({
   // "/" will be accessible to all users
@@ -18,7 +17,7 @@ export default authMiddleware({
     '/tags',
     '/questions',
     '/question/:id',
-    'profile/:id',
+    '/profile/:id',
     '/community',
   ],
   ignoredRoutes: ['/api/webhook', '/api/chatgpt'],
