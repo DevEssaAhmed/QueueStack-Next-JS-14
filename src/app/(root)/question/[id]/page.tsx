@@ -27,6 +27,7 @@ const QuestionDetailsPage = async ({ params, searchParams }: any) => {
   const result = await getQuestionById({ questionId: params.id });
   if (!result) return null;
 
+
   const showActionButtons = clerkId && clerkId === result?.author.clerkId;
 
   return (
@@ -34,7 +35,7 @@ const QuestionDetailsPage = async ({ params, searchParams }: any) => {
       <div className='flex-start w-full flex-col'>
         <div className='flex w-full flex-col-reverse justify-between gap-5 sm:flex-row sm:items-center sm:gap-2'>
           <Link
-            href={`/profile/${result.author.clearkId}`}
+            href={`/profile/${result.author.clerkId}`}
             className='flex items-center justify-start gap-1'
           >
             <Image

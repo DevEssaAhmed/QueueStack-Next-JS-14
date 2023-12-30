@@ -117,7 +117,7 @@ const Answer = ({
       );
 
       const aiAnswer = await response.json();
-
+      console.log(aiAnswer);
       const formattedAiAnswer = aiAnswer.error
         ? 'Sorry, I could not provide an answer to your question, please try again.'
         : aiAnswer.reply.replace(/\n/g, '<br />');
