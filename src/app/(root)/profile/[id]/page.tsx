@@ -22,7 +22,7 @@ export async function generateMetadata({
   const user = await getUserById({ userId: params.id });
 
   return {
-    title: `${user.username}'s Profile — DevOverflow`,
+    title: `${user?.username}'s Profile — DevOverflow`,
   };
 }
 
